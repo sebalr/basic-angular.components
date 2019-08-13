@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg neo-navbar">
+  <!-- Colapse sidebar -->
+  <button *ngIf="colapsableSidebar" class="sidebar-toggler navbar-toggler ripple mr-4" type="button"
+    (click)="toggleSidebar()">
+    <span class="navbar-toggler-icon">
+      <i class="fas fa-bars neo-icon"></i>
+    </span>
+  </button>
+  <!-- Brand Desktop -->
+  <a class="navbar-brand d-none d-lg-block" href="#">
+    <img class="lg-logo" src="assets/img/logo-lg.png" alt="">
+  </a>
+  <!-- Brand Mobile -->
+  <a class="sm-logo d-lg-none">
+    <span class="sm-logo-default"></span>
+  </a>
+  <!-- Toggler Sidebar -->
+  <button class="navbar-toggler ripple" type="button" (click)="toggleMobileSidebar()">
+    <span class="navbar-toggler-icon">
+      <i class="fas fa-bars neo-icon"></i>
+    </span>
+  </button>
+  <div class="d-lg-none">
+    <button class="return-arrow ripple" *ngIf="!(coreService.hideReturn$ | async)" (click)="back()">
+      <i class="fas fa-arrow-left neo-icon"></i>
+    </button>
+  </div>
+
+  <ul *ngIf="dropdownActive" class="navbar-nav">
+    <li class="nav-item dropdown" ngbDropdown class="d-inline-block my-2 my-lg-0" placement="bottom-right">
+      <a id="dropdown" class="header-dropdown" ngbDropdownToggle tabindex="1">{{getName()}}</a>
+      <div ngbDropdownMenu aria-labelledby="dropdown">
+        <ng-content></ng-content>
+      </div>
+    </li>
+  </ul>
+</nav>
