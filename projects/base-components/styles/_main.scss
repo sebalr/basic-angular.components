@@ -133,7 +133,8 @@ slr-layout {
   right: 0;
   z-index: 1000;
   width: 100%;
-  background-color: rgba(0,0,0,.6);
+  background-color: black;
+  opacity: 0.6;
 }
 
 .mobile-sidebar-backdrop.opacity-transition {

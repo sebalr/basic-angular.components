@@ -1,4 +1,4 @@
-<div *ngIf="open" class="mobile-sidebar neo-mobile-sidebar overflow-auto">
+<div @sidebarTrigger *ngIf="open" class="mobile-sidebar neo-mobile-sidebar overflow-auto">
   <slr-sidebar>
     <ng-container ngProjectAs="full-sidebar">
       <ng-content></ng-content>
@@ -6,4 +6,4 @@
   </slr-sidebar>
 </div>
 
-<div *ngIf="open" class="mobile-sidebar-backdrop" (click)="toggleSidebar()"></div>
+<div @backdropTrigger *ngIf="open" class="mobile-sidebar-backdrop" (click)="toggleSidebar()"></div>

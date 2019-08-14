@@ -9,3 +9,5 @@ export * from './lib/footer';
 export * from './lib/header';
 export * from './lib/sidebar';
 export * from './lib/sidebar-mobile';
+export * from './lib/shared/animations/keyframe';
+
