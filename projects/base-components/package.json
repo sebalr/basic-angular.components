@@ -2,8 +2,11 @@
   "name": "base-components",
   "version": "0.0.1",
   "peerDependencies": {
+    "@angular/animations": "^8.2.2",
+    "@angular/cdk": "^8.1.2",
     "@angular/common": "^8.2.0",
     "@angular/core": "^8.2.0",
+    "@fortawesome/fontawesome-free": "^5.10.1",
     "@ng-bootstrap/ng-bootstrap": "^5.0.1",
     "bootstrap": "^4.3.1"
   }
