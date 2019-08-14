@@ -11,6 +11,6 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [BaseComponentsComponent, HeaderComponent, SidebarComponent, FooterComponent, SidebarMobileComponent],
   imports: [CommonModule],
-  exports: [BaseComponentsComponent]
+  exports: [BaseComponentsComponent, HeaderComponent, SidebarComponent, SidebarMobileComponent, FooterComponent]
 })
 export class BaseComponentsModule { }
