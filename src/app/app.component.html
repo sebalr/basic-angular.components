@@ -54,11 +54,13 @@
     </div>
 
     <slr-footer>
-      <div class="d-flex justify-content-center align-items-center">
+      <ng-container ngProjectAs="regular-footer">
         <label>Mail &nbsp;</label>
         <label> Phone &nbsp;</label>
         <label>Other Info</label>
         <label> &nbsp; Version:</label>
-      </div>
+      </ng-container>
+      <ng-container ngProjectAs="mobile-footer">
+      </ng-container>
     </slr-footer>
   </div>
