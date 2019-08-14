@@ -31,6 +31,6 @@ export class HeaderComponent implements OnInit {
   }
 
   public toggleMobileSidebar() {
-    this.sidebarMobileService.toggleSidebar.next(true);
+    this.sidebarMobileService.toggleSidebar.next();
   }
 }

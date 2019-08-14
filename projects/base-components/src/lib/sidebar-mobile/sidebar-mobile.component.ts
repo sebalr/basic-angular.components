@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SidebarMobileService } from './sidebar-mobile.service';
 import { Subscription } from 'rxjs';
-import { BaseComponentsService } from '../base-components.service';
 
 @Component({
   selector: 'slr-sidebar-mobile',
@@ -18,6 +17,10 @@ export class SidebarMobileComponent implements OnInit, OnDestroy {
     this.subs.add(this.sidebarService.toggleSidebar.subscribe(() => {
       this.open = !this.open;
     }));
+  }
+
+  public toggleSidebar(): void {
+    this.sidebarService.toggleSidebar.next();
   }
 
   ngOnDestroy() {
