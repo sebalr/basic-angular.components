@@ -51,6 +51,10 @@ slr-layout {
   background-color: gray;
 }
 
+.lg-logo{
+  height: 36px;
+}
+
 .sm-logo-default {
   background-image: url("src/assets/img/logo-sm.png");
   background-position: 100% 0;
@@ -86,7 +90,7 @@ slr-layout {
 .mobile-sidebar {
   position: fixed;
   top: 0;
-  left: -100%;
+  //left: -100%;
   width: 300px;
   z-index: 1001;
   bottom: 0;
