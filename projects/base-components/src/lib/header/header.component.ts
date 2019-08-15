@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
 
   @Input() public dropdownActive = false;
   @Input() public colapsableSidebar = false;
+  @Input() public mobileSidebar = false;
 
   constructor(public coreService: BaseComponentsService, private sidebarService: SidebarService,
     private sidebarMobileService: SidebarMobileService) { }

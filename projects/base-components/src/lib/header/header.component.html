@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg neo-navbar">
+<nav class="navbar navbar-expand-lg slr-navbar">
   <!-- Colapse sidebar -->
   <button *ngIf="colapsableSidebar" class="sidebar-toggler navbar-toggler ripple mr-4" type="button"
     (click)="toggleSidebar()">
@@ -15,7 +15,7 @@
     <span class="sm-logo-default"></span>
   </a>
   <!-- Toggler Sidebar -->
-  <button class="navbar-toggler ripple" type="button" (click)="toggleMobileSidebar()">
+  <button *ngIf="mobileSidebar" class="navbar-toggler ripple" type="button" (click)="toggleMobileSidebar()">
     <span class="navbar-toggler-icon">
       <i class="fas fa-bars neo-icon"></i>
     </span>

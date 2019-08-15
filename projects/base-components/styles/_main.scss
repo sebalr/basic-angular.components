@@ -13,13 +13,17 @@
   top: 76px;
 }
 
+.slr-navbar{
+  min-height: 52px;
+  max-height: 56px;
+}
+
 slr-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 500;
-  box-shadow: 3px 3px 10px 1px #ccc;
 }
 
 slr-header.ios-header {
