@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Subscription } from 'rxjs';
+import { Subscription, BehaviorSubject } from 'rxjs';
+import { LoaderService } from 'base-components';
 
 @Component({
   selector: 'slr-root',
@@ -11,8 +12,9 @@ export class AppComponent implements OnDestroy {
 
   public subscriptions = new Subscription();
   public isMobile = false;
+  public userName = new BehaviorSubject<string>('');
 
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(private breakpointObserver: BreakpointObserver, private loaderService: LoaderService) {
     this.subscriptions.add(this.breakpointObserver.observe([
       Breakpoints.Small,
       Breakpoints.XSmall
@@ -23,6 +25,12 @@ export class AppComponent implements OnDestroy {
         this.isMobile = false;
       }
     }));
+    const sub = this.loaderService.show();
+    this.loaderService.show();
+    setTimeout(() => {
+      console.log('hide');
+      this.loaderService.hide(sub);
+    }, 3000);
   }
 
   ngOnDestroy() {
