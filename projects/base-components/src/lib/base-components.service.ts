@@ -6,6 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class BaseComponentsService {
 
+  private name: string;
+
   public hideReturn$ = new BehaviorSubject<boolean>(true);
 
   constructor() { }
@@ -14,7 +16,11 @@ export class BaseComponentsService {
     console.log('back');
   }
 
+  public setName(name: string) {
+    this.name = name;
+  }
+
   public getName(): string {
-    return 'name';
+    return this.name;
   }
 }
