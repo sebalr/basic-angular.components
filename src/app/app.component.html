@@ -1,6 +1,8 @@
 <slr-loader></slr-loader>
 <div class="base-layout">
-  <slr-header [colapsableSidebar]="false"></slr-header>
+  <slr-header [dropdownActive]="true" [colapsableSidebar]="false">
+    <button ngbDropdownItem>Action - 1</button>
+  </slr-header>
   <slr-sidebar-mobile *ngIf="isMobile">
 
     <label class="image-item">
