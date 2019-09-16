@@ -26,7 +26,7 @@
     </button>
   </div>
 
-  <ul *ngIf="dropdownActive" class="navbar-nav">
+  <ul *ngIf="dropdownActive && getName() != null" class="navbar-nav">
     <li display="dynamic" class="nav-item dropdown" ngbDropdown class="d-inline-block my-2 my-lg-0">
       <a id="dropdown" class="header-dropdown" ngbDropdownToggle tabindex="1">{{getName()}}</a>
       <div ngbDropdownMenu aria-labelledby="dropdown">
