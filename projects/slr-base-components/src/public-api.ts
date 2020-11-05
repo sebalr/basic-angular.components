@@ -1,5 +1,5 @@
 /*
- * Public API Surface of base-components
+ * Public API Surface of slr-base-components
  */
 
 export * from './lib/base-components.service';

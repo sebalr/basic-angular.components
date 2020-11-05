@@ -1,4 +1,4 @@
 {
-  "entry": "./projects/base-components/styles/_main.scss",
-  "dest": "./dist/base-components/styles/_main.scss"
+  "entry": "./projects/slr-base-components/styles/_main.scss",
+  "dest": "./dist/slr-base-components/styles/_main.scss"
 }

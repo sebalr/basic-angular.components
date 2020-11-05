@@ -1,5 +1,5 @@
 {
-  "name": "base-components",
+  "name": "slr-base-components",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/animations": "^8.2.2",

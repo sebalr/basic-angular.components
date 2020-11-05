@@ -144,33 +144,33 @@
         }
       }
     },
-    "base-components": {
+    "slr-base-components": {
       "projectType": "library",
-      "root": "projects/base-components",
-      "sourceRoot": "projects/base-components/src",
+      "root": "projects/slr-base-components",
+      "sourceRoot": "projects/slr-base-components/src",
       "prefix": "slr",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/base-components/tsconfig.lib.json",
-            "project": "projects/base-components/ng-package.json"
+            "tsConfig": "projects/slr-base-components/tsconfig.lib.json",
+            "project": "projects/slr-base-components/ng-package.json"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/base-components/src/test.ts",
-            "tsConfig": "projects/base-components/tsconfig.spec.json",
-            "karmaConfig": "projects/base-components/karma.conf.js"
+            "main": "projects/slr-base-components/src/test.ts",
+            "tsConfig": "projects/slr-base-components/tsconfig.spec.json",
+            "karmaConfig": "projects/slr-base-components/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/base-components/tsconfig.lib.json",
-              "projects/base-components/tsconfig.spec.json"
+              "projects/slr-base-components/tsconfig.lib.json",
+              "projects/slr-base-components/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -178,6 +178,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "base-proyect"
 }

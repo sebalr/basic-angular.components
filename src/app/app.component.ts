@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Subscription, BehaviorSubject } from 'rxjs';
-import { LoaderService } from 'base-components';
+import { LoaderService } from 'slr-base-components';
 
 @Component({
   selector: 'slr-root',

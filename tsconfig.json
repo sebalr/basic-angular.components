@@ -19,11 +19,11 @@
       "dom"
     ],
     "paths": {
-      "base-components": [
-        "dist/base-components"
+      "slr-base-components": [
+        "dist/slr-base-components"
       ],
-      "base-components/*": [
-        "dist/base-components/*"
+      "slr-base-components/*": [
+        "dist/slr-base-components/*"
       ]
     }
   },

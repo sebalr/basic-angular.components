@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'slr-base-components',
+  selector: 'slr-slr-base-components',
   template: `
     <p>
-      base-components works!
+      slr-base-components works!
     </p>
   `,
   styles: []

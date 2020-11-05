@@ -8,8 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build_lib": "ng build base-components",
-    "npm_pack": "cd dist/base-components && npm pack",
+    "build_lib": "ng build slr-base-components",
+    "npm_pack": "cd dist/slr-base-components && npm pack",
     "package": "npm run build_lib && npm run npm_pack",
     "debug": "npm run build_lib && ng serve --vendorSourceMap",
     "postbuild_lib": "scss-bundle -c scss-bundle.config.json"
