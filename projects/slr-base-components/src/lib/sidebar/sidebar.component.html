@@ -1,4 +1,10 @@
-<div class="neo-sidebar" [class.neo-sidebar-closed]="!open">
-  <ng-content *ngIf="open" select="full-sidebar"></ng-content>
-  <ng-content *ngIf="!open" select="small-sidebar"></ng-content>
+<div>
+  <ng-content
+    *ngIf="open"
+    select="full-sidebar"
+  ></ng-content>
+  <ng-content
+    *ngIf="!open"
+    select="small-sidebar"
+  ></ng-content>
 </div>
