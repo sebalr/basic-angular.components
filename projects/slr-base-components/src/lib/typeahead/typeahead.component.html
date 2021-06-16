@@ -1,0 +1,17 @@
+<label
+  *ngIf="label"
+  [for]="inputId"
+>
+  {{label}}
+</label>
+<input
+  [id]="inputId"
+  [placeholder]="placeholder"
+  type="text"
+  class="form-control"
+  [(ngModel)]="model"
+  [ngbTypeahead]="search"
+  [inputFormatter]="formatter"
+  #instance="ngbTypeahead"
+  (selectItem)="selectedItem($event)"
+/>
