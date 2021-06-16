@@ -116,15 +116,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
             ]
           }
         },
@@ -153,13 +149,13 @@
           "options": {
             "tsConfig": "projects/slr-base-components/tsconfig.lib.json",
             "project": "projects/slr-base-components/ng-package.json"
-          }
-        ,          "configurations": {
+          },
+          "configurations": {
             "production": {
               "tsConfig": "projects/slr-base-components/tsconfig.lib.prod.json"
             }
           }
-},
+        },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
@@ -169,19 +165,19 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/slr-base-components/tsconfig.lib.json",
-              "projects/slr-base-components/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/slr-base-components/**/*.ts",
+              "projects/slr-base-components/**/*.html"
             ]
           }
         }
       }
     }
   },
-  "defaultProject": "base-proyect"
+  "defaultProject": "base-proyect",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

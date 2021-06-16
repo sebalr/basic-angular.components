@@ -1,22 +1,20 @@
 import { EventEmitter, Output, ViewChild } from '@angular/core';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbTypeahead, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of, OperatorFunction } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
-
-export interface TypeaheadModel { label: string, item: any };
-export interface TypeaheadProvider { filter: (term: string) => Observable<TypeaheadModel[]> };
+import { ITypeaheadModel, ITypeaheadProvider } from './typeahead.interfaces';
 
 @Component({
   selector: 'slr-typeahead',
   templateUrl: './typeahead.component.html',
-  styleUrls: ['./typeahead.component.css']
+  styleUrls: ['./typeahead.component.scss']
 })
-export class TypeaheadComponent implements OnInit {
+export class TypeaheadComponent<T> {
 
-  @Output() selected = new EventEmitter<TypeaheadModel>();
+  @Output() selected = new EventEmitter<ITypeaheadModel>();
 
-  @Input() provider: TypeaheadProvider;
+  @Input() provider: ITypeaheadProvider<T>;
   @Input() label = '';
   @Input() inputId = '';
   @Input() placeholder = '';
@@ -24,17 +22,12 @@ export class TypeaheadComponent implements OnInit {
 
   @ViewChild('instance', { static: true }) instance: NgbTypeahead;
 
-  readonly formatter = (x: TypeaheadModel) => x.label;
+  readonly formatter = (x: ITypeaheadModel): string => x.label;
 
-  model: any;
+  model: T;
   searching = false;
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  search: OperatorFunction<string, readonly TypeaheadModel[]> = (text$: Observable<string>) =>
+  search: OperatorFunction<string, readonly ITypeaheadModel[]> = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(this.debounce),
       distinctUntilChanged(),
@@ -47,8 +40,8 @@ export class TypeaheadComponent implements OnInit {
     this.selected.emit($event.item);
   }
 
-  modelChange($event): void {
-    if ($event?.length === 0) {
+  modelChange($event: T | string): void {
+    if (typeof $event === 'string' && $event?.length === 0) {
       this.selected.emit(null);
     }
   }
