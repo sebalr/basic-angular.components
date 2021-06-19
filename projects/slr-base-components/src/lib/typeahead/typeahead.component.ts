@@ -1,9 +1,9 @@
 import { EventEmitter, Output, ViewChild } from '@angular/core';
 import { Component, Input } from '@angular/core';
 import { NgbTypeahead, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
+import { ITypeaheadModel, ITypeaheadProvider } from '../shared/providers/providers.interfaces';
 import { Observable, of, OperatorFunction } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
-import { ITypeaheadModel, ITypeaheadProvider } from './typeahead.interfaces';
 
 @Component({
   selector: 'slr-typeahead',
