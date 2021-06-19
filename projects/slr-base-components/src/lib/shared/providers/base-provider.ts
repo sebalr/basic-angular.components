@@ -16,7 +16,7 @@ export class BaseProvider<T extends IBaseDto, U extends BaseModel> implements IB
   }
 
   public getOne(id: number): Observable<U> {
-    return this.httpClient.get<{ data: T }>(`this.url/${id}`).pipe(
+    return this.httpClient.get<{ data: T }>(`${this.url}/${id}`).pipe(
       map(res => { return this.mapItem(res.data); })
     );
   }
@@ -28,13 +28,13 @@ export class BaseProvider<T extends IBaseDto, U extends BaseModel> implements IB
   }
 
   public edit(id: number, item: T): Observable<U> {
-    return this.httpClient.put<{ data: T }>(`this.url/${id}`, item).pipe(
+    return this.httpClient.put<{ data: T }>(`${this.url}/${id}`, item).pipe(
       map(res => { return this.mapItem(res.data); })
     );
   }
 
   public delete(id: number): Observable<U> {
-    return this.httpClient.delete<{ data: T }>(`this.url/${id}`).pipe(
+    return this.httpClient.delete<{ data: T }>(`${this.url}/${id}`).pipe(
       map(res => { return this.mapItem(res.data); })
     );
   }
