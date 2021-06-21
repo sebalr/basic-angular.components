@@ -1,0 +1,18 @@
+<label
+  *ngIf="label"
+  [for]="inputId"
+>
+  {{label}}
+</label>
+<input
+  [id]="inputId"
+  [placeholder]="placeholder"
+  type="text"
+  class="form-control"
+  [(ngModel)]="model"
+  [ngbTypeahead]="search"
+  (focus)="focus$.next($any($event).target.value)"
+  (click)="click$.next($any($event).target.value)"
+  #instance="ngbTypeahead"
+  (selectItem)="selectedItem($event)"
+/>

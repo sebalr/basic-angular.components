@@ -1,0 +1,60 @@
+import { EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { NgbTypeahead, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
+import { ITypeaheadBaseProvider, ITypeaheadModel } from '../shared/providers/providers.interfaces';
+import { merge, Observable, OperatorFunction, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
+
+@Component({
+  selector: 'slr-basic-typeahead',
+  templateUrl: './basic-typeahead.component.html',
+  styleUrls: ['./basic-typeahead.component.scss']
+})
+export class BasicTypeaheadComponent<T> implements OnInit {
+
+  @Output() selected = new EventEmitter<ITypeaheadModel>();
+
+  @Input() provider: ITypeaheadBaseProvider<T>;
+  @Input() label = '';
+  @Input() inputId = '';
+  @Input() placeholder = '';
+  @Input() debounce = 200;
+
+  @ViewChild('instance', { static: true }) instance: NgbTypeahead;
+
+  private data: ITypeaheadModel[] = [];
+
+  public focus$ = new Subject<string>();
+  public click$ = new Subject<string>();
+
+  readonly formatter = (x: ITypeaheadModel): string => x.label;
+
+  model: ITypeaheadModel;
+
+  ngOnInit(): void {
+    this.provider.getTypeahead().subscribe(res => this.data = res);
+  }
+
+  search: OperatorFunction<string, readonly ITypeaheadModel[]> = (text$: Observable<string>) => {
+    const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
+    const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
+    const inputFocus$ = this.focus$;
+
+    return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
+      map(term => (
+        term === ''
+          ? this.data
+          : this.data.filter(v => v.label.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10)
+      ));
+  }
+
+  selectedItem($event: NgbTypeaheadSelectItemEvent): void {
+    this.selected.emit($event.item);
+  }
+
+  modelChange($event: ITypeaheadModel | string): void {
+    if (typeof $event === 'string' && $event?.length === 0) {
+      this.selected.emit(null);
+    }
+  }
+}

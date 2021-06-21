@@ -40,7 +40,7 @@ export class TypeaheadComponent<T> {
     this.selected.emit($event.item);
   }
 
-  modelChange($event: T | string): void {
+  modelChange($event: ITypeaheadModel | string): void {
     if (typeof $event === 'string' && $event?.length === 0) {
       this.selected.emit(null);
     }
