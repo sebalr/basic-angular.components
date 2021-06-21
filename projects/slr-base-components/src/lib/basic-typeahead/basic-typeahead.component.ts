@@ -1,4 +1,4 @@
-import { EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { EventEmitter, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Component, Input } from '@angular/core';
 import { NgbTypeahead, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 import { ITypeaheadBaseProvider, ITypeaheadModel } from '../shared/providers/providers.interfaces';
@@ -10,10 +10,11 @@ import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
   templateUrl: './basic-typeahead.component.html',
   styleUrls: ['./basic-typeahead.component.scss']
 })
-export class BasicTypeaheadComponent<T> implements OnInit {
+export class BasicTypeaheadComponent<T> implements OnInit, OnChanges {
 
-  @Output() selected = new EventEmitter<ITypeaheadModel>();
+  @Output() selectedChange = new EventEmitter<ITypeaheadModel>();
 
+  @Input() selected: ITypeaheadModel;
   @Input() provider: ITypeaheadBaseProvider<T>;
   @Input() label = '';
   @Input() inputId = '';
@@ -35,6 +36,12 @@ export class BasicTypeaheadComponent<T> implements OnInit {
     this.provider.getTypeahead().subscribe(res => this.data = res);
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.selected) {
+      this.model = changes.selected.currentValue as ITypeaheadModel;
+    }
+  }
+
   search: OperatorFunction<string, readonly ITypeaheadModel[]> = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
@@ -49,12 +56,12 @@ export class BasicTypeaheadComponent<T> implements OnInit {
   }
 
   selectedItem($event: NgbTypeaheadSelectItemEvent): void {
-    this.selected.emit($event.item);
+    this.selectedChange.emit($event.item);
   }
 
   modelChange($event: ITypeaheadModel | string): void {
     if (typeof $event === 'string' && $event?.length === 0) {
-      this.selected.emit(null);
+      this.selectedChange.emit(null);
     }
   }
 }

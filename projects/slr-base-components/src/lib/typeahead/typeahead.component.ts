@@ -1,4 +1,4 @@
-import { EventEmitter, Output, ViewChild } from '@angular/core';
+import { EventEmitter, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Component, Input } from '@angular/core';
 import { NgbTypeahead, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 import { ITypeaheadModel, ITypeaheadProvider } from '../shared/providers/providers.interfaces';
@@ -10,10 +10,11 @@ import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operato
   templateUrl: './typeahead.component.html',
   styleUrls: ['./typeahead.component.scss']
 })
-export class TypeaheadComponent<T> {
+export class TypeaheadComponent<T> implements OnChanges {
 
-  @Output() selected = new EventEmitter<ITypeaheadModel>();
+  @Output() selectedChange = new EventEmitter<ITypeaheadModel>();
 
+  @Input() selected: ITypeaheadModel;
   @Input() provider: ITypeaheadProvider<T>;
   @Input() label = '';
   @Input() inputId = '';
@@ -24,8 +25,14 @@ export class TypeaheadComponent<T> {
 
   readonly formatter = (x: ITypeaheadModel): string => x.label;
 
-  model: T;
+  model: ITypeaheadModel;
   searching = false;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.selected) {
+      this.model = changes.selected.currentValue as ITypeaheadModel;
+    }
+  }
 
   search: OperatorFunction<string, readonly ITypeaheadModel[]> = (text$: Observable<string>) =>
     text$.pipe(
@@ -37,12 +44,12 @@ export class TypeaheadComponent<T> {
     );
 
   selectedItem($event: NgbTypeaheadSelectItemEvent): void {
-    this.selected.emit($event.item);
+    this.selectedChange.emit($event.item);
   }
 
   modelChange($event: ITypeaheadModel | string): void {
     if (typeof $event === 'string' && $event?.length === 0) {
-      this.selected.emit(null);
+      this.selectedChange.emit(null);
     }
   }
 }

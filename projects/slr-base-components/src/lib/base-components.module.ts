@@ -8,7 +8,7 @@ import { LoaderComponent } from './loader/loader.component';
 import { NgbDropdownModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { TypeaheadComponent } from './typeahead/typeahead.component';
 import { FormsModule } from '@angular/forms';
-import { BasicTypeaheadComponent } from 'projects/slr-base-components/src/lib/basic-typeahead';
+import { BasicTypeaheadComponent } from './basic-typeahead/basic-typeahead.component';
 
 
 @NgModule({

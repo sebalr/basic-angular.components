@@ -1,6 +1,6 @@
 {
   "name": "base-proyect",
-  "version": "11.0.1",
+  "version": "11.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build_lib": "ng build slr-base-components",
+    "build_lib": "ng build --prod slr-base-components",
     "npm_pack": "cd dist/slr-base-components && npm pack",
     "package": "npm run build_lib && npm run npm_pack",
     "debug": "npm run build_lib && ng serve --vendorSourceMap",
