@@ -10,11 +10,11 @@ import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
   templateUrl: './basic-typeahead.component.html',
   styleUrls: ['./basic-typeahead.component.scss']
 })
-export class BasicTypeaheadComponent<T> implements OnInit, OnChanges {
+export class BasicTypeaheadComponent implements OnInit, OnChanges {
 
   @Output() selectedChange = new EventEmitter<ITypeaheadModel>();
 
-  @Input() selected: ITypeaheadModel;
+  @Input() selected: ITypeaheadModel | null;
   @Input() provider: ITypeaheadBaseProvider;
   @Input() label = '';
   @Input() inputId = '';
