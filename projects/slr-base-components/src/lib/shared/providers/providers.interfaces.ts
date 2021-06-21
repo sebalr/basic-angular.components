@@ -31,7 +31,6 @@ export interface ITypeaheadProvider<T> {
   filter: (term: string) => Observable<ITypeaheadModel[]>;
   mapTypeaheadItem: (item: T) => ITypeaheadModel;
 }
-export interface ITypeaheadBaseProvider<T> {
+export interface ITypeaheadBaseProvider {
   getTypeahead: () => Observable<ITypeaheadModel[]>;
-  mapTypeaheadItem: (item: T) => ITypeaheadModel;
 }
