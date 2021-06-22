@@ -1,7 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Subscription, BehaviorSubject } from 'rxjs';
-import { LoaderService } from 'slr-base-components';
+import { ITypeaheadModel, LoaderService } from 'slr-base-components';
+import { ProviderService } from 'src/app/provider.service';
 
 @Component({
   selector: 'slr-root',
@@ -14,7 +15,12 @@ export class AppComponent implements OnDestroy {
   public isMobile = false;
   public userName = new BehaviorSubject<string>('');
 
-  constructor(private breakpointObserver: BreakpointObserver, private loaderService: LoaderService) {
+  public selected: ITypeaheadModel;
+
+  constructor(
+    public provider: ProviderService,
+    private breakpointObserver: BreakpointObserver,
+    private loaderService: LoaderService) {
     this.subscriptions.add(this.breakpointObserver.observe([
       Breakpoints.Small,
       Breakpoints.XSmall
@@ -31,6 +37,10 @@ export class AppComponent implements OnDestroy {
       console.log('hide');
       this.loaderService.hide(sub);
     }, 3000);
+  }
+
+  public test() {
+    console.log(this.selected);
   }
 
   ngOnDestroy() {

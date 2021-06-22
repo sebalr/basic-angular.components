@@ -11,6 +11,7 @@
   class="form-control"
   [(ngModel)]="model"
   [ngbTypeahead]="search"
+  [resultFormatter]="formatter"
   [inputFormatter]="formatter"
   #instance="ngbTypeahead"
   (selectItem)="selectedItem($event)"
