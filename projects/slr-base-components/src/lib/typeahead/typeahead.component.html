@@ -6,7 +6,9 @@
 </label>
 <input
   [id]="inputId"
+  [required]="required"
   [placeholder]="placeholder"
+  [editable]="editable"
   type="text"
   class="form-control"
   [(ngModel)]="model"
@@ -14,5 +16,6 @@
   [resultFormatter]="formatter"
   [inputFormatter]="formatter"
   #instance="ngbTypeahead"
+  (ngModelChange)="modelChange($event)"
   (selectItem)="selectedItem($event)"
 />

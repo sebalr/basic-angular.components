@@ -14,10 +14,13 @@ export class BasicTypeaheadComponent implements OnInit, OnChanges {
 
   @Output() selectedChange = new EventEmitter<ITypeaheadModel>();
 
-  @Input() selected: ITypeaheadModel | null;
+  @Input() selected: ITypeaheadModel;
   @Input() provider: ITypeaheadBaseProvider;
   @Input() label = '';
   @Input() inputId = '';
+  @Input() required = false;
+  @Input() withClear = false;
+  @Input() editable = false;
   @Input() placeholder = '';
   @Input() debounce = 200;
 
@@ -61,7 +64,12 @@ export class BasicTypeaheadComponent implements OnInit, OnChanges {
 
   modelChange($event: ITypeaheadModel | string): void {
     if (typeof $event === 'string' && $event?.length === 0) {
-      this.selectedChange.emit(null);
+      this.selectedChange.emit({ label: '', item: null });
     }
+  }
+
+  clear(): void {
+    this.model = null;
+    this.selectedChange.emit({ label: '', item: null });
   }
 }

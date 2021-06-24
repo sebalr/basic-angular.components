@@ -154,6 +154,11 @@
             "production": {
               "tsConfig": "projects/slr-base-components/tsconfig.lib.prod.json"
             }
+          },
+          "sourceMap": {
+            "scripts": true,
+            "styles": true,
+            "vendor": true
           }
         },
         "test": {

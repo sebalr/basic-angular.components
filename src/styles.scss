@@ -1,4 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~bootstrap/dist/css/bootstrap.min.css';
-@import '~@fortawesome/fontawesome-free/css/all.css';
-@import 'dist/slr-base-components/styles/main.scss';
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import "dist/slr-base-components/styles/main.scss";
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid #42a948; /* green */
+}
+
+.ng-invalid:not(form):not(div) {
+  border-left: 5px solid #a94442; /* red */
+}

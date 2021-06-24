@@ -36,7 +36,11 @@ export class AppComponent implements OnDestroy {
     setTimeout(() => {
       console.log('hide');
       this.loaderService.hide(sub);
-    }, 3000);
+    }, 1500);
+  }
+
+  public onTypeahead($event) {
+    console.log($event);
   }
 
   public test() {

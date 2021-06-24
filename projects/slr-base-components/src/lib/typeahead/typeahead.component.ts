@@ -18,6 +18,8 @@ export class TypeaheadComponent<T> implements OnChanges {
   @Input() provider: ITypeaheadProvider<T>;
   @Input() label = '';
   @Input() inputId = '';
+  @Input() required = false;
+  @Input() editable = false;
   @Input() placeholder = '';
   @Input() debounce = 200;
 

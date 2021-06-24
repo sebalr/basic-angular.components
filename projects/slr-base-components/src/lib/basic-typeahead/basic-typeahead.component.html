@@ -4,17 +4,32 @@
 >
   {{label}}
 </label>
-<input
-  [id]="inputId"
-  [placeholder]="placeholder"
-  [resultFormatter]="formatter"
-  [inputFormatter]="formatter"
-  type="text"
-  class="form-control"
-  [(ngModel)]="model"
-  [ngbTypeahead]="search"
-  (focus)="focus$.next($any($event).target.value)"
-  (click)="click$.next($any($event).target.value)"
-  #instance="ngbTypeahead"
-  (selectItem)="selectedItem($event)"
-/>
+<div class="input-group">
+  <input
+    #instance="ngbTypeahead"
+    [id]="inputId"
+    type="text"
+    class="form-control"
+    [editable]="editable"
+    [required]="required"
+    [placeholder]="placeholder"
+    [resultFormatter]="formatter"
+    [inputFormatter]="formatter"
+    [ngbTypeahead]="search"
+    [(ngModel)]="model"
+    (focus)="focus$.next($any($event).target.value)"
+    (click)="click$.next($any($event).target.value)"
+    (selectItem)="selectedItem($event)"
+    (ngModelChange)="modelChange($event)"
+  />
+  <div
+    *ngIf="withClear"
+    class="input-group-append"
+  >
+    <button
+      class="btn btn-outline-secondary"
+      type="button"
+      (click)="clear()"
+    > <i class="fas fa-times"></i></button>
+  </div>
+</div>
