@@ -14,7 +14,7 @@ export class BasicTypeaheadComponent implements OnInit, OnChanges {
 
   @Output() selectedChange = new EventEmitter<ITypeaheadModel>();
 
-  @Input() selected: ITypeaheadModel;
+  @Input() selected: ITypeaheadModel | null;
   @Input() provider: ITypeaheadBaseProvider;
   @Input() label = '';
   @Input() inputId = '';

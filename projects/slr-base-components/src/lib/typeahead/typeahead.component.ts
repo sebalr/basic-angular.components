@@ -14,7 +14,7 @@ export class TypeaheadComponent<T> implements OnChanges {
 
   @Output() selectedChange = new EventEmitter<ITypeaheadModel>();
 
-  @Input() selected: ITypeaheadModel;
+  @Input() selected: ITypeaheadModel | null;
   @Input() provider: ITypeaheadProvider<T>;
   @Input() label = '';
   @Input() inputId = '';
