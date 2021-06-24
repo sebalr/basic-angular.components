@@ -11,6 +11,7 @@
   [editable]="editable"
   type="text"
   class="form-control"
+  [class.form-control-sm]="small"
   [(ngModel)]="model"
   [ngbTypeahead]="search"
   [resultFormatter]="formatter"

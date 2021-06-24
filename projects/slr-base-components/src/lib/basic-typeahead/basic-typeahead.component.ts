@@ -12,11 +12,12 @@ import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 })
 export class BasicTypeaheadComponent implements OnInit, OnChanges {
 
-  @Output() selectedChange = new EventEmitter<ITypeaheadModel>();
+  @Output() selectedChange = new EventEmitter<ITypeaheadModel | null>();
 
   @Input() selected: ITypeaheadModel | null;
   @Input() provider: ITypeaheadBaseProvider;
   @Input() label = '';
+  @Input() small = true;
   @Input() inputId = '';
   @Input() required = false;
   @Input() withClear = false;
@@ -64,12 +65,12 @@ export class BasicTypeaheadComponent implements OnInit, OnChanges {
 
   modelChange($event: ITypeaheadModel | string): void {
     if (typeof $event === 'string' && $event?.length === 0) {
-      this.selectedChange.emit({ label: '', item: null });
+      this.selectedChange.emit(null);
     }
   }
 
   clear(): void {
     this.model = null;
-    this.selectedChange.emit({ label: '', item: null });
+    this.selectedChange.emit(null);
   }
 }

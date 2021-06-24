@@ -17,6 +17,7 @@ export class TypeaheadComponent<T> implements OnChanges {
   @Input() selected: ITypeaheadModel | null;
   @Input() provider: ITypeaheadProvider<T>;
   @Input() label = '';
+  @Input() small = true;
   @Input() inputId = '';
   @Input() required = false;
   @Input() editable = false;
