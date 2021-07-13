@@ -9,7 +9,7 @@ export * from './lib/header';
 export * from './lib/sidebar';
 export * from './lib/loader';
 export * from './lib/sidebar-mobile';
-export * from './lib/sidebar-mobile';
+export * from './lib/sidebar';
 export * from './lib/typeahead';
 export * from './lib/basic-typeahead';
 export * from './lib/shared/animations/keyframe';
