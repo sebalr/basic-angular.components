@@ -1,74 +1,61 @@
 <nav class="navbar slr-navbar">
   <!-- Colapse sidebar -->
-  <button
-    *ngIf="colapsableSidebar"
-    class="sidebar-toggler navbar-toggler ripple mr-4"
-    type="button"
-    (click)="toggleSidebar()"
-  >
-    <span class="navbar-toggler-icon">
-      <i class="fas fa-bars slr-icon"></i>
-    </span>
-  </button>
+  <ng-container *ngIf="colapsableSidebar">
+    <button class="sidebar-toggler navbar-toggler ripple mr-4"
+      type="button"
+      (click)="toggleSidebar()">
+      <span #defaultIcon>
+        <ng-content select="toggle-icon"></ng-content>
+      </span>
+      <span *ngIf="!defaultIcon.innerHTML.trim()"
+        class="navbar-toggler-icon">
+        <i class="fas fa-bars slr-icon"></i>
+      </span>
+    </button>
+
+
+  </ng-container>
   <!-- Brand Desktop -->
-  <a
-    class="navbar-brand d-none d-lg-block"
-    href="#"
-  >
-    <img
-      class="lg-logo"
+  <a class="navbar-brand d-none d-lg-block"
+    href="#">
+    <img class="lg-logo"
       src="assets/img/logo-lg.png"
-      alt=""
-    >
+      alt="">
   </a>
   <!-- Brand Mobile -->
-  <a
-    class="sm-logo d-lg-none"
-    href="#"
-  >
+  <a class="sm-logo d-lg-none"
+    href="#">
     <span class="sm-logo-default"></span>
   </a>
   <!-- Toggler Sidebar -->
-  <button
-    *ngIf="mobileSidebar"
+  <button *ngIf="mobileSidebar"
     class="navbar-toggler ripple"
     type="button"
-    (click)="toggleMobileSidebar()"
-  >
+    (click)="toggleMobileSidebar()">
     <span class="navbar-toggler-icon">
       <i class="fas fa-bars slr-icon"></i>
     </span>
   </button>
   <div class="d-lg-none">
-    <button
-      class="return-arrow ripple"
+    <button class="return-arrow ripple"
       *ngIf="!(coreService.hideReturn$ | async)"
-      (click)="back()"
-    >
+      (click)="back()">
       <i class="fas fa-arrow-left slr-icon"></i>
     </button>
   </div>
 
-  <ul
-    *ngIf="dropdownActive && getName() != null"
-    class="navbar-nav"
-  >
-    <li
-      display="dynamic"
+  <ul *ngIf="dropdownActive && getName() != null"
+    class="navbar-nav">
+    <li display="dynamic"
       class="nav-item dropdown"
       ngbDropdown
-      class="d-inline-block my-2 my-lg-0"
-    >
-      <a
-        id="dropdown"
+      class="d-inline-block my-2 my-lg-0">
+      <a id="dropdown"
         class="header-dropdown"
         ngbDropdownToggle
-        tabindex="1"
-      >{{getName()}}</a>
-      <div
-        ngbDropdownMenu
-        aria-labelledby="dropdown"
-      >
+        tabindex="1">{{getName()}}</a>
+      <div ngbDropdownMenu
+        aria-labelledby="dropdown">
         <ng-content></ng-content>
       </div>
     </li>
