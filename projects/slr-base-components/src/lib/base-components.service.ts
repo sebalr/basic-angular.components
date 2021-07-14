@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,13 @@ export class BaseComponentsService {
 
   public hideReturn$ = new BehaviorSubject<boolean>(true);
 
-  constructor() { }
+  constructor(private location: Location) { }
 
   public back(): void {
-    console.log('back');
+    this.location.back();
   }
 
-  public setName(name: string) {
+  public setName(name: string): void {
     this.name = name;
   }
 

@@ -1,25 +1,53 @@
-import { Component, OnInit, Input } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { Component, Input, OnDestroy } from '@angular/core';
 import { SidebarService } from '../sidebar/sidebar.service';
 import { BaseComponentsService } from '../base-components.service';
 import { SidebarMobileService } from '../sidebar-mobile/sidebar-mobile.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'slr-header',
   templateUrl: './header.component.html'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnDestroy {
 
   @Input() public dropdownActive = false;
+  @Input() public backNavigationActive = false;
   @Input() public colapsableSidebar = false;
   @Input() public mobileSidebar = false;
+  @Input() public homeRoute = 'home';
 
-  constructor(public coreService: BaseComponentsService, private sidebarService: SidebarService,
-    private sidebarMobileService: SidebarMobileService) { }
+  public inHome = false;
 
-  ngOnInit() {
+  public get showDropdown(): boolean {
+    return this.dropdownActive && this.getName() != null;
   }
 
-  public toggleSidebar() {
+  public get showBack(): boolean {
+    return this.backNavigationActive && !this.inHome;
+  }
+
+  private subs = new Subscription();
+
+  constructor(
+    private router: Router,
+    public coreService: BaseComponentsService,
+    private sidebarService: SidebarService,
+    private sidebarMobileService: SidebarMobileService) {
+
+    this.subs.add(this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ).subscribe((event: any) => {
+      this.inHome = event.url?.endsWith(this.homeRoute) ?? false;
+    }));
+  }
+
+  public toggleSidebar(): void {
     this.sidebarService.toggleSidebar.next();
   }
 
@@ -31,7 +59,11 @@ export class HeaderComponent implements OnInit {
     return this.coreService.getName();
   }
 
-  public toggleMobileSidebar() {
+  public toggleMobileSidebar(): void {
     this.sidebarMobileService.toggleSidebar.next();
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 }

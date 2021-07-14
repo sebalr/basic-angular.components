@@ -12,8 +12,6 @@
         <i class="fas fa-bars slr-icon"></i>
       </span>
     </button>
-
-
   </ng-container>
   <!-- Brand Desktop -->
   <a class="navbar-brand d-none d-lg-block"
@@ -38,13 +36,19 @@
   </button>
   <div class="d-lg-none">
     <button class="return-arrow ripple"
-      *ngIf="!(coreService.hideReturn$ | async)"
+      *ngIf="(coreService.hideReturn$ | async) === (false || null || undefined)"
       (click)="back()">
-      <i class="fas fa-arrow-left slr-icon"></i>
+      <span #defaultIconBackSm>
+        <ng-content select="toggle-icon"></ng-content>
+      </span>
+      <span *ngIf="!defaultIconBackSm.innerHTML.trim()"
+        class="navbar-toggler-icon">
+        <i class="fas fa-arrow-left slr-icon"></i>
+      </span>
     </button>
   </div>
 
-  <ul *ngIf="dropdownActive && getName() != null"
+  <ul *ngIf="showDropdown"
     class="navbar-nav">
     <li display="dynamic"
       class="nav-item dropdown"
@@ -60,4 +64,17 @@
       </div>
     </li>
   </ul>
+  <ng-container *ngIf="showBack">
+    <button class="sidebar-toggler navbar-toggler ripple mr-4"
+      type="button"
+      (click)="back()">
+      <span #defaultIconBackBig>
+        <ng-content select="toggle-icon"></ng-content>
+      </span>
+      <span *ngIf="!defaultIconBackBig.innerHTML.trim()"
+        class="navbar-toggler-icon">
+        <i class="fas fa-arrow-left slr-icon"></i>
+      </span>
+    </button>
+  </ng-container>
 </nav>
