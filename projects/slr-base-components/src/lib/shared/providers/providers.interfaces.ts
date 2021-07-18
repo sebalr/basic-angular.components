@@ -27,9 +27,9 @@ export interface IBaseProvider<T extends IBaseDto, U extends BaseModel> {
 }
 
 export interface ITypeaheadModel<T> { label: string, item: T }
-export interface ITypeaheadProvider<T> {
-  filter: (term: string) => Observable<ITypeaheadModel<T>[]>;
-  mapTypeaheadItem: (item: T) => ITypeaheadModel<T>;
+export interface ITypeaheadProvider<T, U> {
+  filter: (term: string) => Observable<ITypeaheadModel<U>[]>;
+  mapTypeaheadItem: (item: T) => ITypeaheadModel<U>;
 }
 export interface ITypeaheadBaseProvider<T> {
   getTypeahead: () => Observable<ITypeaheadModel<T>[]>;

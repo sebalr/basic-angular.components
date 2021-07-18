@@ -10,12 +10,12 @@ import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operato
   templateUrl: './typeahead.component.html',
   styleUrls: ['./typeahead.component.scss']
 })
-export class TypeaheadComponent<T> implements OnChanges {
+export class TypeaheadComponent<T, U> implements OnChanges {
 
   @Output() selectedChange = new EventEmitter<ITypeaheadModel<T>>();
 
   @Input() selected: ITypeaheadModel<T> | null;
-  @Input() provider: ITypeaheadProvider<T>;
+  @Input() provider: ITypeaheadProvider<T, U>;
   @Input() label = '';
   @Input() small = true;
   @Input() inputId = '';
