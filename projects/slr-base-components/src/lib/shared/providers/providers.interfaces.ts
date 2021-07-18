@@ -26,11 +26,11 @@ export interface IBaseProvider<T extends IBaseDto, U extends BaseModel> {
   mapItem: (item: T) => U;
 }
 
-export interface ITypeaheadModel { label: string, item: any }
+export interface ITypeaheadModel<T> { label: string, item: T }
 export interface ITypeaheadProvider<T> {
-  filter: (term: string) => Observable<ITypeaheadModel[]>;
-  mapTypeaheadItem: (item: T) => ITypeaheadModel;
+  filter: (term: string) => Observable<ITypeaheadModel<T>[]>;
+  mapTypeaheadItem: (item: T) => ITypeaheadModel<T>;
 }
-export interface ITypeaheadBaseProvider {
-  getTypeahead: () => Observable<ITypeaheadModel[]>;
+export interface ITypeaheadBaseProvider<T> {
+  getTypeahead: () => Observable<ITypeaheadModel<T>[]>;
 }

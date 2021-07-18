@@ -10,12 +10,12 @@ import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
   templateUrl: './basic-typeahead.component.html',
   styleUrls: ['./basic-typeahead.component.scss']
 })
-export class BasicTypeaheadComponent implements OnInit, OnChanges {
+export class BasicTypeaheadComponent<T> implements OnInit, OnChanges {
 
-  @Output() selectedChange = new EventEmitter<ITypeaheadModel | null>();
+  @Output() selectedChange = new EventEmitter<ITypeaheadModel<T> | null>();
 
-  @Input() selected: ITypeaheadModel | null;
-  @Input() provider: ITypeaheadBaseProvider;
+  @Input() selected: ITypeaheadModel<T> | null;
+  @Input() provider: ITypeaheadBaseProvider<T>;
   @Input() label = '';
   @Input() small = true;
   @Input() inputId = '';
@@ -27,14 +27,14 @@ export class BasicTypeaheadComponent implements OnInit, OnChanges {
 
   @ViewChild('instance', { static: true }) instance: NgbTypeahead;
 
-  private data: ITypeaheadModel[] = [];
+  private data: ITypeaheadModel<T>[] = [];
 
   public focus$ = new Subject<string>();
   public click$ = new Subject<string>();
 
-  readonly formatter = (x: ITypeaheadModel): string => x.label;
+  readonly formatter = (x: ITypeaheadModel<T>): string => x.label;
 
-  model: ITypeaheadModel;
+  model: ITypeaheadModel<T>;
 
   ngOnInit(): void {
     this.provider.getTypeahead().subscribe(res => this.data = res);
@@ -42,11 +42,11 @@ export class BasicTypeaheadComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.selected) {
-      this.model = changes.selected.currentValue as ITypeaheadModel;
+      this.model = changes.selected.currentValue as ITypeaheadModel<T>;
     }
   }
 
-  search: OperatorFunction<string, readonly ITypeaheadModel[]> = (text$: Observable<string>) => {
+  search: OperatorFunction<string, readonly ITypeaheadModel<T>[]> = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
     const inputFocus$ = this.focus$;
@@ -63,7 +63,7 @@ export class BasicTypeaheadComponent implements OnInit, OnChanges {
     this.selectedChange.emit($event.item);
   }
 
-  modelChange($event: ITypeaheadModel | string): void {
+  modelChange($event: ITypeaheadModel<T> | string): void {
     if (typeof $event === 'string' && $event?.length === 0) {
       this.selectedChange.emit(null);
     }

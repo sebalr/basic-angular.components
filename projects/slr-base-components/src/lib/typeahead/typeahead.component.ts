@@ -1,8 +1,8 @@
-import { EventEmitter, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { ElementRef, EventEmitter, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Component, Input } from '@angular/core';
 import { NgbTypeahead, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 import { ITypeaheadModel, ITypeaheadProvider } from '../shared/providers/providers.interfaces';
-import { Observable, of, OperatorFunction } from 'rxjs';
+import { Observable, of, OperatorFunction, timer } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 
 @Component({
@@ -12,9 +12,9 @@ import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operato
 })
 export class TypeaheadComponent<T> implements OnChanges {
 
-  @Output() selectedChange = new EventEmitter<ITypeaheadModel>();
+  @Output() selectedChange = new EventEmitter<ITypeaheadModel<T>>();
 
-  @Input() selected: ITypeaheadModel | null;
+  @Input() selected: ITypeaheadModel<T> | null;
   @Input() provider: ITypeaheadProvider<T>;
   @Input() label = '';
   @Input() small = true;
@@ -25,19 +25,24 @@ export class TypeaheadComponent<T> implements OnChanges {
   @Input() debounce = 200;
 
   @ViewChild('instance', { static: true }) instance: NgbTypeahead;
+  @ViewChild('input') input: ElementRef<HTMLInputElement>;
 
-  readonly formatter = (x: ITypeaheadModel): string => x.label;
+  readonly formatter = (x: ITypeaheadModel<T>): string => x.label;
 
-  model: ITypeaheadModel;
+  model: ITypeaheadModel<T>;
   searching = false;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.selected) {
-      this.model = changes.selected.currentValue as ITypeaheadModel;
+      this.model = changes.selected.currentValue as ITypeaheadModel<T>;
     }
   }
 
-  search: OperatorFunction<string, readonly ITypeaheadModel[]> = (text$: Observable<string>) =>
+  public focus(): void {
+    this.input.nativeElement.focus()
+  }
+
+  search: OperatorFunction<string, readonly ITypeaheadModel<T>[]> = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(this.debounce),
       distinctUntilChanged(),
@@ -50,9 +55,18 @@ export class TypeaheadComponent<T> implements OnChanges {
     this.selectedChange.emit($event.item);
   }
 
-  modelChange($event: ITypeaheadModel | string): void {
+  modelChange($event: ITypeaheadModel<T> | string): void {
     if (typeof $event === 'string' && $event?.length === 0) {
       this.selectedChange.emit(null);
     }
+  }
+
+  blurInput(): void {
+    timer(150).subscribe(() => {
+      if (typeof this.model === 'string') {
+        this.model = undefined;
+        this.selectedChange.emit(null);
+      }
+    });
   }
 }

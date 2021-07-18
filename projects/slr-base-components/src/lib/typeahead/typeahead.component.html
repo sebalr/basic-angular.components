@@ -1,11 +1,8 @@
-<label
-  *ngIf="label"
-  [for]="inputId"
->
+<label *ngIf="label"
+  [for]="inputId">
   {{label}}
 </label>
-<input
-  [id]="inputId"
+<input [id]="inputId"
   [required]="required"
   [placeholder]="placeholder"
   [editable]="editable"
@@ -19,4 +16,4 @@
   #instance="ngbTypeahead"
   (ngModelChange)="modelChange($event)"
   (selectItem)="selectedItem($event)"
-/>
+  (blur)="blurInput()" />
