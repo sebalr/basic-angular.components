@@ -12,9 +12,9 @@ import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operato
 })
 export class TypeaheadComponent<T, U> implements OnChanges {
 
-  @Output() selectedChange = new EventEmitter<ITypeaheadModel<T>>();
+  @Output() selectedChange = new EventEmitter<ITypeaheadModel<U>>();
 
-  @Input() selected: ITypeaheadModel<T> | null;
+  @Input() selected: ITypeaheadModel<U> | null;
   @Input() provider: ITypeaheadProvider<T, U>;
   @Input() label = '';
   @Input() small = true;
@@ -27,14 +27,14 @@ export class TypeaheadComponent<T, U> implements OnChanges {
   @ViewChild('instance', { static: true }) instance: NgbTypeahead;
   @ViewChild('input') input: ElementRef<HTMLInputElement>;
 
-  readonly formatter = (x: ITypeaheadModel<T>): string => x.label;
+  readonly formatter = (x: ITypeaheadModel<U>): string => x.label;
 
-  model: ITypeaheadModel<T>;
+  model: ITypeaheadModel<U>;
   searching = false;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.selected) {
-      this.model = changes.selected.currentValue as ITypeaheadModel<T>;
+      this.model = changes.selected.currentValue as ITypeaheadModel<U>;
     }
   }
 
@@ -42,7 +42,7 @@ export class TypeaheadComponent<T, U> implements OnChanges {
     this.input.nativeElement.focus()
   }
 
-  search: OperatorFunction<string, readonly ITypeaheadModel<T>[]> = (text$: Observable<string>) =>
+  search: OperatorFunction<string, readonly ITypeaheadModel<U>[]> = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(this.debounce),
       distinctUntilChanged(),
@@ -55,7 +55,7 @@ export class TypeaheadComponent<T, U> implements OnChanges {
     this.selectedChange.emit($event.item);
   }
 
-  modelChange($event: ITypeaheadModel<T> | string): void {
+  modelChange($event: ITypeaheadModel<U> | string): void {
     if (typeof $event === 'string' && $event?.length === 0) {
       this.selectedChange.emit(null);
     }
