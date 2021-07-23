@@ -17,6 +17,7 @@ export class HeaderComponent implements OnDestroy {
 
   @Input() public dropdownActive = false;
   @Input() public backNavigationActive = false;
+  @Input() public backNavigationSmActive = false;
   @Input() public colapsableSidebar = false;
   @Input() public mobileSidebar = false;
   @Input() public homeRoute = 'home';
@@ -29,6 +30,9 @@ export class HeaderComponent implements OnDestroy {
 
   public get showBack(): boolean {
     return this.backNavigationActive && !this.inHome;
+  }
+  public get showBackSm(): boolean {
+    return this.backNavigationSmActive && !this.inHome;
   }
 
   private subs = new Subscription();

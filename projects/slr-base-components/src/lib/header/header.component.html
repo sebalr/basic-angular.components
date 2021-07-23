@@ -27,25 +27,32 @@
   </a>
   <!-- Toggler Sidebar -->
   <button *ngIf="mobileSidebar"
-    class="navbar-toggler ripple"
+    class="sidebar-toggler navbar-toggler ripple"
     type="button"
     (click)="toggleMobileSidebar()">
-    <span class="navbar-toggler-icon">
+    <span #defaultIconTogble>
+      <ng-content select="toggle-icon"></ng-content>
+    </span>
+    <span *ngIf="!defaultIconTogble.innerHTML.trim()"
+      class="navbar-toggler-icon">
       <i class="fas fa-bars slr-icon"></i>
     </span>
   </button>
+
   <div class="d-lg-none">
-    <button class="return-arrow ripple"
-      *ngIf="showBack"
-      (click)="back()">
-      <span #defaultIconBackSm>
-        <ng-content select="toggle-icon"></ng-content>
-      </span>
-      <span *ngIf="!defaultIconBackSm.innerHTML.trim()"
-        class="navbar-toggler-icon">
-        <i class="fas fa-arrow-left slr-icon"></i>
-      </span>
-    </button>
+    <ng-container *ngIf="showBackSm">
+      <button class="sidebar-toggler navbar-toggler ripple"
+        type="button"
+        (click)="back()">
+        <span #defaultIconBackSm>
+          <ng-content select="back-icon"></ng-content>
+        </span>
+        <span *ngIf="!defaultIconBackSm.innerHTML.trim()"
+          class="navbar-toggler-icon">
+          <i class="fas fa-arrow-left slr-icon"></i>
+        </span>
+      </button>
+    </ng-container>
   </div>
 
   <ul *ngIf="showDropdown"
