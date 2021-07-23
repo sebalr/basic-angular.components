@@ -27,7 +27,7 @@
   </a>
   <!-- Toggler Sidebar -->
   <button *ngIf="mobileSidebar"
-    class="sidebar-toggler navbar-toggler ripple"
+    class="navbar-toggler ripple"
     type="button"
     (click)="toggleMobileSidebar()">
     <span #defaultIconTogble>
@@ -41,7 +41,7 @@
 
   <div class="d-lg-none">
     <ng-container *ngIf="showBackSm">
-      <button class="sidebar-toggler navbar-toggler ripple"
+      <button class="navbar-toggler ripple"
         type="button"
         (click)="back()">
         <span #defaultIconBackSm>
