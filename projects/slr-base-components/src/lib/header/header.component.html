@@ -31,7 +31,7 @@
     type="button"
     (click)="toggleMobileSidebar()">
     <span #defaultIconTogble>
-      <ng-content select="toggle-icon"></ng-content>
+      <ng-content select="toggle-icon-sm"></ng-content>
     </span>
     <span *ngIf="!defaultIconTogble.innerHTML.trim()"
       class="navbar-toggler-icon">
@@ -45,7 +45,7 @@
         type="button"
         (click)="back()">
         <span #defaultIconBackSm>
-          <ng-content select="back-icon"></ng-content>
+          <ng-content select="back-icon-sm"></ng-content>
         </span>
         <span *ngIf="!defaultIconBackSm.innerHTML.trim()"
           class="navbar-toggler-icon">
