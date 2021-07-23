@@ -1,6 +1,6 @@
 {
   "name": "slr-base-components",
-  "version": "11.3.5",
+  "version": "11.3.6",
   "dependencies": {
     "tslib": "^2.0.0"
   },
