@@ -36,7 +36,7 @@
   </button>
   <div class="d-lg-none">
     <button class="return-arrow ripple"
-      *ngIf="(coreService.hideReturn$ | async) === (false || null || undefined)"
+      *ngIf="showBack"
       (click)="back()">
       <span #defaultIconBackSm>
         <ng-content select="toggle-icon"></ng-content>

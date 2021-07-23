@@ -5,7 +5,7 @@ import { ITypeaheadBaseProvider } from 'slr-base-components';
 @Injectable({
   providedIn: 'root'
 })
-export class ProviderService implements ITypeaheadBaseProvider {
+export class ProviderService implements ITypeaheadBaseProvider<any> {
 
 
   getTypeahead(): Observable<{ label: string; item: { a: string; }; }[]> {

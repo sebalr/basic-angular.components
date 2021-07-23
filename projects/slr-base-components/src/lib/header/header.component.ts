@@ -24,7 +24,7 @@ export class HeaderComponent implements OnDestroy {
   public inHome = false;
 
   public get showDropdown(): boolean {
-    return this.dropdownActive && this.getName() != null;
+    return this.dropdownActive && this.getName() != null && this.inHome;
   }
 
   public get showBack(): boolean {

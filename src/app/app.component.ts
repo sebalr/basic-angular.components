@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Subscription, BehaviorSubject } from 'rxjs';
-import { ITypeaheadModel, LoaderService } from 'slr-base-components';
+import { ITypeaheadModel, LoaderService, BaseComponentsService } from 'slr-base-components';
 import { ProviderService } from 'src/app/provider.service';
 
 @Component({
@@ -15,9 +15,10 @@ export class AppComponent implements OnDestroy {
   public isMobile = false;
   public userName = new BehaviorSubject<string>('');
 
-  public selected: ITypeaheadModel;
+  public selected: ITypeaheadModel<any>;
 
   constructor(
+    private coreService: BaseComponentsService,
     public provider: ProviderService,
     private breakpointObserver: BreakpointObserver,
     private loaderService: LoaderService) {
@@ -36,6 +37,7 @@ export class AppComponent implements OnDestroy {
     setTimeout(() => {
       console.log('hide');
       this.loaderService.hide(sub);
+      this.coreService.setName('asdsad');
     }, 1500);
   }
 
