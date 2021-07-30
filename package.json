@@ -1,6 +1,6 @@
 {
   "name": "base-proyect",
-  "version": "11.3.6",
+  "version": "11.3.7",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

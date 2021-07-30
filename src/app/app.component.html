@@ -79,6 +79,12 @@
           (selectedChange)="onTypeahead($event)"
           [withClear]="true">
         </slr-basic-typeahead>
+        <slr-typeahead [required]="true"
+          [searchOnFocus]="false"
+          [(selected)]="selected"
+          [provider]="taprovider"
+          (selectedChange)="onTypeahead($event)">
+        </slr-typeahead>
         <button class="btn btn-primary mt-2"
           (click)="test()">test</button>
         <!--       <router-outlet></router-outlet> -->

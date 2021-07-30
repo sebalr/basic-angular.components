@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Subscription, BehaviorSubject } from 'rxjs';
 import { ITypeaheadModel, LoaderService, BaseComponentsService } from 'slr-base-components';
 import { ProviderService } from 'src/app/provider.service';
+import { TaProviderService } from 'src/app/ta-provider.service';
 
 @Component({
   selector: 'slr-root',
@@ -20,6 +21,7 @@ export class AppComponent implements OnDestroy {
   constructor(
     private coreService: BaseComponentsService,
     public provider: ProviderService,
+    public taprovider: TaProviderService,
     private breakpointObserver: BreakpointObserver,
     private loaderService: LoaderService) {
     this.subscriptions.add(this.breakpointObserver.observe([
