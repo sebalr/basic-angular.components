@@ -23,6 +23,7 @@ export class TypeaheadComponent<T, U> implements OnInit, OnChanges {
   @Input() inputId = '';
   @Input() required = false;
   @Input() editable = false;
+  @Input() disabled = false;
   @Input() placeholder = '';
   @Input() debounce = 200;
   @Input() searchOnFocus = false;
